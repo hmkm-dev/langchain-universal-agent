@@ -1,25 +1,25 @@
 name: Universal AI Agent
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   run-agent:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
 
       - name: Run agent
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          TASK: "Research latest AI tools"
-        run: python main.py
+        run: |
+          python main.py
